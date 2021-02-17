@@ -16,6 +16,5 @@ set(HEADERS ${INCLUDE_FOLDER}/main.hpp)
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 target_link_libraries(${PROJECT_NAME} PUBLIC 
 	glfw
-	OpenGL::GL
 	glad
 )
