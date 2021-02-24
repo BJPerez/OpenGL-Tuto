@@ -46,7 +46,7 @@ int main(void)
 
     // build and compile our shader program
     // ------------------------------------
-    Shader shaderProgram("shader.vs", "shader.fs");
+    Shader shaderProgram("shader.vert", "shader.frag");
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
