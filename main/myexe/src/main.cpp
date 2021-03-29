@@ -1,6 +1,10 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
 
@@ -13,7 +17,7 @@ void processInput(GLFWwindow* window);
 
 // settings
 constexpr unsigned int SCR_WIDTH = 800;
-constexpr unsigned int SCR_HEIGHT = 600;
+constexpr unsigned int SCR_HEIGHT = 600; 
 
 int main(void)
 {
@@ -143,11 +147,11 @@ int main(void)
     stbi_image_free(data);
 
 
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
     shaderProgram.Use(); 
     shaderProgram.SetInt("texture1", 0);      
-    shaderProgram.SetInt("texture2", 1);                                
+    shaderProgram.SetInt("texture2", 1);     
+
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     // render loop
     // -----------
@@ -167,6 +171,12 @@ int main(void)
         glBindTexture(GL_TEXTURE_2D, texture1);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, texture2);
+
+        // transform matrix
+        glm::mat4 trans = glm::mat4(1.0f);
+        trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
+        trans = glm::rotate(trans, (float) glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+        shaderProgram.SetMat4("transform", trans);
 
         // draw our first triangle
         shaderProgram.Use();
