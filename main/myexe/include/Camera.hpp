@@ -55,6 +55,8 @@ public:
     // wheel-axis
     void ProcessMouseScroll(const float yoffset);
 
+    glm::vec3 GetPos() const { return m_Position; }
+
 private:
     // camera Attributes
     glm::vec3 m_Position;
